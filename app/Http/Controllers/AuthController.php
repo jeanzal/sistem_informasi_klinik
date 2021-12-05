@@ -61,17 +61,12 @@ class AuthController extends Controller
 
             try{
                 $pengguna->save();
-
                 //email
             $email = Helper::encrypt($request->email);
             $reset_token = $pengguna->token;
             $link = route('auth.password',[$email,$reset_token]);
             Mail::to($request->email)->send(new ResetPassword( $pengguna->name,$link));
                 return redirect(route('auth.reset'))->with('pesan','Silahkan Cek Email , Anda Mapunyai 5 menit untuk mengatur ulang kata sandi');
-
-
-
-
             }catch(\Exception $e){
                 return redirect(route('auth.reset'))->with('pesan','Gagal mengatur ulang kata sandi');
 

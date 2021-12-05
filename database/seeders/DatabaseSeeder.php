@@ -18,17 +18,19 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         DB::table('admins')->insert([
-            'name' => Str::random(10),
+            'name' => 'SuperAdmin',
             'role' => 'sa',
             'email' => 'sa@mail.com',
             'password' => Hash::make('password'),
+            'image' => 'SuperAdmin.png',
 
         ]);
         DB::table('admins')->insert([
-            'name' => Str::random(10),
+            'name' => 'Admin',
             'role' => 'admin',
             'email' => 'admin@mail.com',
             'password' => Hash::make('password'),
+            'image' => 'Admin.png',
 
         ]);
         DB::table('categories')->insert ([

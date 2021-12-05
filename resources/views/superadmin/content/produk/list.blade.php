@@ -24,8 +24,8 @@
                 <td>{{$row->stock}}</td>
                 <td>{{$row->kategori}}</td>
                 <td>
-                    <a href="" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fa fa-edit"></i></a>
-                    <a onclick = "return confirm('Apakah Anda Yakin?')" href="" data-toggle="tooltip" data-placement="top" title="Hapus data"><i class="fa fa-trash"></i></a>
+                    <a href="{{route('superadmin.produk.edit', $row->id)}}" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fa fa-edit"></i></a>
+                    <a onclick = "return confirm('Apakah Anda Yakin?')" href="{{route('superadmin.produk.delete', $row->id)}}" data-toggle="tooltip" data-placement="top" title="Hapus data"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         @endforeach

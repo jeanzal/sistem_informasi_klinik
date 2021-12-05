@@ -18,7 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->dateTime('date');
             $table->unsignedBigInteger('pasien_id');
             $table->timestamps();
-            $table->foreign('pasien_id')->references('id')->on('pasien');
+            $table->foreign('pasien_id')->references('id')->on('pasien')->onUpdate('cascade')->onDelete('cascade');
 
         });
     }

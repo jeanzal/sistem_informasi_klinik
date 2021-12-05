@@ -38,5 +38,34 @@ class ProductController extends Controller
             return redirect (route('superadmin.produk.index'))->with('pesan-gagal','Anda gagal menambah data obat');
         }
     }
+    public function edit($id){
+        Session::put ('title','Ubah Data Produk');
+        $product = Product::findOrFail($id);
+        $kategori = Category::all();
+        return view ('superadmin/content/produk/edit', compact('product','kategori'));
+    }
+    public function update(Request $request){
+        $product = Product::findOrFail($request->id);
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+        $product->category_id = $request->category_id;
+        try {
+            $product->save();
+            return redirect (route('superadmin.produk.index'))->with('pesan-berhasil','Anda berhasil mengubah data Produk');
+        }catch(\Exception $e){
+            return redirect (route('superadmin.produk.index'))->with('pesan-gagal','Anda gagal mengubah data Produk');
+        }
+    }
+    public function delete($id){
+        $produk = Product::findOrFail($id);
+        try {
+            $produk->steps->each->delete();
+            $produk->delete();
+            return redirect (route('superadmin.produk.index'))->with('pesan-berhasil','Anda berhasil menghapus data Produk');
+        }catch(\Exception $e){
+            return redirect (route('superadmin.produk.index'))->with('pesan-gagal','Masih ada data yang terikat');
+        }
+    }
 
 }

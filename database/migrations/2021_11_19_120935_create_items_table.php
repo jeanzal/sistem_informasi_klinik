@@ -21,8 +21,8 @@ class CreateItemsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
 
-            $table->foreign('transaction_id')->references('id')->on('transactions');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('transaction_id')->references('id')->on('transactions')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

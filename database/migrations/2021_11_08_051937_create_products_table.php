@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->integer('stock');
             $table->unsignedBigInteger('category_id');
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

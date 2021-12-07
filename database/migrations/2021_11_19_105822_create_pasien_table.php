@@ -16,8 +16,6 @@ class CreatePasienTable extends Migration
         Schema::create('pasien', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-
-
             $table->timestamps();
         });
     }

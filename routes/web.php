@@ -23,6 +23,8 @@ Route::group(['middleware'=>'auth:admin'],function (){
 Route::group(['middleware'=>'auth:superadmin'],function (){
     Route::prefix('superadmin')->group(function (){
         Route::get('/dashboard', [App\Http\Controllers\Superadmin\DashboardController::class, 'index'])->name('superadmin.dashboard.index');
+        Route::get('/dashboard/edit/{id}', [App\Http\Controllers\Superadmin\DashboardController::class, 'edit'])->name('superadmin.dashboard.edit');
+        Route::post('/dashboard/update', [App\Http\Controllers\Superadmin\DashboardController::class, 'update'])->name('superadmin.dashboard.update');
 
         //Group pengguna
         Route::get('/pengguna', [App\Http\Controllers\Superadmin\PenggunaController::class, 'index'])->name('superadmin.pengguna.index');

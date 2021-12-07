@@ -70,9 +70,16 @@
                     <a class="collapse-item" href="{{route('superadmin.kategori.index')}}">Kategori Produk</a>
                     <a class="collapse-item" href="{{route('superadmin.produk.index')}}">Jenis Produk</a>
                     <a class="collapse-item" href="{{route('superadmin.pasien.index')}}">Pasien</a>
+                    <a class="collapse-item" href="{{route('superadmin.dokter.index')}}">Dokter</a>
                     <a class="collapse-item" href="{{route('superadmin.transaction.index')}}">Transaksi</a>
+                    <a class="collapse-item" href="{{route('superadmin.pembayaran.index')}}">Pembayaran</a>
                 </div>
             </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Laporan</span></a>
         </li>
 
 

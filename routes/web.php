@@ -64,6 +64,13 @@ Route::group(['middleware'=>'auth:superadmin'],function (){
         Route::post('/transaction/store', [App\Http\Controllers\Superadmin\TransactionController::class, 'store'])->name('superadmin.transaction.store');
         Route::get('/transaction/print/{id}', [App\Http\Controllers\Superadmin\TransactionController::class, 'print'])->name('superadmin.transaction.print');
 
+        //Grup Dokter
+        Route::get('/dokter', [App\Http\Controllers\Superadmin\DokterController::class, 'index'])->name('superadmin.dokter.index');
+
+
+        //Grup Pemmbayaran
+        Route::get('/pembayaran', [App\Http\Controllers\Superadmin\PembayaranController::class, 'index'])->name('superadmin.pembayaran.index');
+
     });
 });
 

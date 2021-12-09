@@ -81,6 +81,13 @@ Route::group(['middleware'=>'auth:superadmin'],function (){
     });
 });
 
+//Group Admin
+Route::group(['middleware'=>'auth:user'],function (){
+    Route::prefix('user')->group(function (){
+        Route::get('/dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('user.dashboard.index');
+    });
+});
+
 Route::get('download/{filename}', function($filename) {
     $file_path = storage_path('app/public/' . $filename);
     if (file_exists($file_path)) {

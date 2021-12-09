@@ -33,6 +33,13 @@ class DatabaseSeeder extends Seeder
             'image' => 'Admin.png',
 
         ]);
+        DB::table('admins')->insert([
+            'name' => 'Jojo',
+            'role' => 'user',
+            'email' => 'jojo@mail.com',
+            'password' => Hash::make('password'),
+            'image' => 'user.png',
+        ]);
         DB::table('categories')->insert ([
             'id' =>1,
             'name'=>'Obat Dalam'

@@ -32,7 +32,7 @@
     <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.dashboard.index')}}">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('user.dashboard.index')}}">
             <div class="sidebar-brand-icon ">
                 <i class="fas fa-user"></i>
             </div>
@@ -44,7 +44,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="{{route('admin.dashboard.index')}}">
+            <a class="nav-link" href="{{route('user.dashboard.index')}}">
                 <i class="fas fa-fw fa-home"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -124,7 +124,7 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::guard('admin')->user()->name}}</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::guard('user')->user()->name}}</span>
                             <img class="img-profile rounded-circle"
                                  src="{{asset('assets/img/undraw_profile.svg')}}">
                         </a>

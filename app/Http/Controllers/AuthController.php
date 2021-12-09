@@ -27,27 +27,33 @@ class AuthController extends Controller
             return redirect()->intended('/admin/dashboard');
         } else if (Auth::guard('superadmin')->attempt(['email' => $request->email, 'password' => $request->password, 'role' => 'sa', 'status' => 1])) {
             return redirect()->intended('/superadmin/dashboard');
+        }else if (Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password, 'role' => 'user', 'status' => 1])) {
+            return redirect()->intended('/user/dashboard');
         }else{
             //user tidak ditemukan
             return redirect('/login')->with('pesan','Password yang anda masukan salah');
         }
     }
+
     public function logout(){
         if (Auth::guard('admin')->check()) {
             Auth::guard('admin')->logout();
         }elseif (Auth::guard('superadmin')->check()){
             Auth::guard('superadmin')->logout();
+        }elseif (Auth::guard('user')->check()){
+            Auth::guard('user')->logout();
         }
         return redirect('/login');
     }
+
     public function reset(){
         return view('reset');
     }
+
     public function forgot(Request $request){
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request, [
             'email' => 'required|email',
-
         ]);
         if(Pengguna::where('email',$request->email)->exists()){
             $pengguna= Pengguna::where('email',$request->email)->first();
@@ -55,7 +61,6 @@ class AuthController extends Controller
             $date = date_create(date('Y-m-d H:i:s'));
             date_add($date,date_interval_create_from_date_string('5 minutes'));
             $expired = date_format($date,'Y-m-d H:i:s');
-
             $pengguna->token =$token;
             $pengguna->expired =$expired;
 
@@ -69,9 +74,7 @@ class AuthController extends Controller
                 return redirect(route('auth.reset'))->with('pesan','Silahkan Cek Email , Anda Mapunyai 5 menit untuk mengatur ulang kata sandi');
             }catch(\Exception $e){
                 return redirect(route('auth.reset'))->with('pesan','Gagal mengatur ulang kata sandi');
-
             }
-
         }else{
             return redirect(route('auth.reset'))->with('pesan','Silahkan Cek Email , Email belum terdaftar braderr');
 
@@ -95,28 +98,21 @@ class AuthController extends Controller
           return redirect(route('auth.reset'))->with('pesan','Token tidak valid braderr');
       }
     }
+    
     public function renew(Request $request){
         date_default_timezone_set('Asia/Jakarta');
         $this->validate($request, [
             'password' => 'required',
             'new_password' => 'required|same:password',
             'token' => 'required',
-
         ]);
-
-
-    $email = Helper::decrypt($request->token);
-    $pengguna = Pengguna::where('email',$email)->first();
-    $pengguna->password = bcrypt($request->password);
-
+        $email = Helper::decrypt($request->token);
+        $pengguna = Pengguna::where('email',$email)->first();
+        $pengguna->password = bcrypt($request->password);
 
         try{
             $pengguna->save();
             return redirect(route('auth.reset'))->with('pesan','Anda Berhasil mengubah Password');
-
-
-
-
         }catch(\Exception $e){
             return redirect(route('auth.reset'))->with('pesan','Gagal mengatur ulang kata sandi');
 

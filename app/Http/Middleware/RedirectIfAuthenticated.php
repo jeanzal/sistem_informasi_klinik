@@ -20,11 +20,11 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, ...$guards)
     {
         if (Auth::guard('admin')->check()) {
-
             return redirect('/admin/dashboard');
         } else if (Auth::guard('superadmin')->check()) {
-
             return redirect('/superadmin/dashboard');
+        } else if (Auth::guard('user')->check()) {
+            return redirect('/user/dashboard');
         }
         return $next($request);
     }

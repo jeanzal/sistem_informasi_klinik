@@ -22,8 +22,10 @@
             $no = 1;
         @endphp
         @foreach($pengguna as $row)
+        
 
             <tr>
+                @if ($row->role == "admin" || $row->role == "sa")
                 <td>{{$no++}}</td>
                 <td>{{$row->name}}</td>
                 <td>{{$row->role}}</td>
@@ -38,6 +40,54 @@
                     <a onclick="return confirm('Apakah anda yakin?')" href="{{route('superadmin.pengguna.delete',$row->id)}}"data-toggle="tooltip" data-placement="top" title="Hapus data"><i class="fa fa-trash"></i></a>
                     <a href="{{route('download_file',$row->image)}}"data-toggle="tooltip" data-placement="top" title="Downlaod file"><i class="fa fa-download"></i></a>
                 </td>
+                @endif
+            </tr>
+
+        @endforeach
+
+        </tbody>
+    </table>
+    <br>
+
+    <h3>Data User</h3><br>
+    <table class="table table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Role</th>
+            <th scope="col">Email</th>
+            <th scope="col">Status</th>
+            <th scope="col">Gambar</th>
+            <th scope="col">Aksi</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @php 
+            $nomor = 1;
+        @endphp
+
+        @foreach($pengguna as $row)
+        
+
+            <tr>
+                @if ($row->role == "user")
+                <td>{{$nomor++}}</td>
+                <td>{{$row->name}}</td>
+                <td>{{$row->role}}</td>
+                <td>{{$row->email}}</td>
+                <td>{{Helper::active($row->status)}}</td>
+                <td>
+                    <a href="{{route('storage_file',$row->image)}}" target="_blank"><img src="{{route('storage_file',$row->image)}}" width="50px"></a>
+                </td>
+                <td>
+
+                    <a href="{{route('superadmin.pengguna.edit',$row->id)}}"data-toggle="tooltip" data-placement="top" title="Edit data"><i class="fa fa-edit"></i></a>
+                    <a onclick="return confirm('Apakah anda yakin?')" href="{{route('superadmin.pengguna.delete',$row->id)}}"data-toggle="tooltip" data-placement="top" title="Hapus data"><i class="fa fa-trash"></i></a>
+                    <a href="{{route('download_file',$row->image)}}"data-toggle="tooltip" data-placement="top" title="Downlaod file"><i class="fa fa-download"></i></a>
+                </td>
+                @endif
             </tr>
 
         @endforeach

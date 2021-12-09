@@ -56,6 +56,7 @@ Route::group(['middleware'=>'auth:superadmin'],function (){
         Route::get('/pasien', [App\Http\Controllers\Superadmin\PasienController::class, 'index'])->name('superadmin.pasien.index');
         Route::get('/pasien/add', [App\Http\Controllers\Superadmin\PasienController::class, 'add'])->name('superadmin.pasien.add');
         Route::post('/pasien/store', [App\Http\Controllers\Superadmin\PasienController::class, 'store'])->name('superadmin.pasien.store');
+        Route::post('/pasien/tambah_user', [App\Http\Controllers\Superadmin\PasienController::class, 'tambah_user'])->name('superadmin.pasien.tambah_user');
         Route::get('/pasien/edit/{id}', [App\Http\Controllers\Superadmin\PasienController::class, 'edit'])->name('superadmin.pasien.edit');
         Route::post('/pasien/update', [App\Http\Controllers\Superadmin\PasienController::class, 'update'])->name('superadmin.pasien.update');
         Route::get('/pasien/delete/{id}', [App\Http\Controllers\Superadmin\PasienController::class, 'delete'])->name('superadmin.pasien.delete');

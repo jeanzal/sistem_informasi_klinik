@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Superadmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pasien;
+use App\Models\Pengguna;
 use Session;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class PasienController extends Controller
         return view ('superadmin/content/pasien/list', compact('pasien'));
     }
     public function add(){
-        Session::put('title','Tambah Data Pasien');
+        Session::put('title','');
         return view ('superadmin/content/pasien/add');
     }
 
@@ -30,6 +31,24 @@ class PasienController extends Controller
         }catch(\Exception $e){
             return redirect (route('superadmin.pasien.index'))->with('pesan-gagal','Anda gagal menambah data pasien');
         }
+    }
+    public function tambah_user(Request $request){
+
+
+        $pengguna = new Pengguna();
+        $pengguna->name = $request->name;
+        $pengguna->role = $request->role;
+        $pengguna->email = $request->email;
+        $pengguna->password = bcrypt('12345678');
+        $pengguna->image = $request->image;
+
+        try {
+            $pengguna->save();
+            return redirect(route('superadmin.pasien.add'))->with('pesan-berhasil','Berhasil membuat akun Pasien');;
+        }catch (\Exception $e){
+            return redirect(route('superadmin.pasien.add'))->with('pesan-gagal','Gagal membuat akun Pasien');;
+        }
+
     }
     public function edit($id){
         Session::put ('title','Ubah Data pasien');

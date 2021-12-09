@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Dokter extends Model
+class RekamMedis extends Model
 {
-    protected $table = 'dokters';
+    protected $table = 'rekam_medis';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama_dokter'
+        'spesialis', 'biaya','dokter_id'
     ];
     public $timestamps = false;
 }

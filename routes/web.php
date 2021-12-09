@@ -76,6 +76,14 @@ Route::group(['middleware'=>'auth:superadmin'],function (){
         Route::post('/dokter/update', [App\Http\Controllers\Superadmin\DokterController::class, 'update'])->name('superadmin.dokter.update');
         Route::get('/dokter/delete/{id}', [App\Http\Controllers\Superadmin\DokterController::class, 'delete'])->name('superadmin.dokter.delete');
 
+        //Grup Rekam Medis
+        Route::get('/rekam_medis', [App\Http\Controllers\Superadmin\RekamMedisController::class, 'index'])->name('superadmin.rekam_medis.index');
+        Route::get('/rekam_medis/add', [App\Http\Controllers\Superadmin\RekamMedisController::class, 'add'])->name('superadmin.rekam_medis.add');
+        Route::post('/rekam_medis/store', [App\Http\Controllers\Superadmin\RekamMedisController::class, 'store'])->name('superadmin.rekam_medis.store');
+        Route::get('/rekam_medis/edit/{id}', [App\Http\Controllers\Superadmin\RekamMedisController::class, 'edit'])->name('superadmin.rekam_medis.edit');
+        Route::post('/rekam_medis/update', [App\Http\Controllers\Superadmin\RekamMedisController::class, 'update'])->name('superadmin.rekam_medis.update');
+        Route::get('/rekam_medis/delete/{id}', [App\Http\Controllers\Superadmin\RekamMedisController::class, 'delete'])->name('superadmin.rekam_medis.delete');
+
         //Grup Pemmbayaran
         Route::get('/pembayaran', [App\Http\Controllers\Superadmin\PembayaranController::class, 'index'])->name('superadmin.pembayaran.index');
 

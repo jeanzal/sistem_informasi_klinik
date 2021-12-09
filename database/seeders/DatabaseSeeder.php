@@ -97,12 +97,22 @@ class DatabaseSeeder extends Seeder
         DB::table('dokters')->insert ([
             'id' =>1,
             'nama_dokter'=> 'Desri',
-            'spesialis'=> 'Ahli Bedah',
         ]);
         DB::table('dokters')->insert ([
             'id' =>2,
             'nama_dokter'=> 'Sihol',
-            'spesialis'=> 'Anak',
+        ]);
+        DB::table('rekam_medis')->insert ([
+            'id' =>1,
+            'spesialis'=> 'Ahli Bedah',
+            'biaya'=> 500000,
+            'dokter_id'=> 1,
+        ]);
+        DB::table('rekam_medis')->insert ([
+            'id' =>2,
+            'spesialis'=> 'Dokter Umum',
+            'biaya'=> 250000,
+            'dokter_id'=> 2,
         ]);
     }
 }

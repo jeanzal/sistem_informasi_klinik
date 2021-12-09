@@ -42,7 +42,7 @@ class TransactionController extends Controller
          return view ('superadmin/content/transaction/detail', compact('transaction','item'));
     }
     public function add(){
-        Session::put('title','Tambah Transaksi Baru');
+        Session::put('title','Tambah Transaksi Membeli Obat');
         $product = Product::all();
         $pasien = Pasien::all();
         return view ('superadmin/content/transaction/add', compact('product','pasien'));

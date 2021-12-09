@@ -16,8 +16,6 @@ class CreateDoktersTable extends Migration
         Schema::create('dokters', function (Blueprint $table) {
             $table->id();
             $table->string('nama_dokter');
-            $table->enum('spesialis', ['Ahli Bedah', 'Dokter Umum','Anak', 'Penyakit Dalam']);
-            $table->timestamps();
         });
     }
 

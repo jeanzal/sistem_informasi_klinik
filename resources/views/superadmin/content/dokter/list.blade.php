@@ -7,7 +7,6 @@
         <tr>
             <th scope="col">No</th>
             <th scope="col">Nama Dokter</th>
-            <th scope="col">Spesialis</th>
             <th scope="col">Aksi</th>
         </tr>
         </thead>
@@ -19,8 +18,6 @@
             <tr>
                 <td>{{$no++}}</td>
                 <td>{{$data->nama_dokter}}</td>
-                <td>{{$data->spesialis}}
-
                 </td>
                 <td>
                     <a href="{{route('superadmin.dokter.edit', $data->id)}}" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fa fa-edit"></i></a>

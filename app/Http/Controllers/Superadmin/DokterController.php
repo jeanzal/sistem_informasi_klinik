@@ -24,7 +24,6 @@ class DokterController extends Controller
     public function store(Request $request){
         $dokter = new Dokter();
         $dokter->nama_dokter = $request->nama_dokter;
-        $dokter->spesialis = $request->spesialis;
         try {
             $dokter->save();
             return redirect (route('superadmin.dokter.index'))->with('pesan-berhasil','Anda berhasil menambah data Dokter');
@@ -40,7 +39,6 @@ class DokterController extends Controller
     public function update(Request $request){
         $dokter = Dokter::findOrFail($request->id);
         $dokter->nama_dokter = $request->nama_dokter;
-        $dokter->spesialis = $request->spesialis;
         try {
             $dokter->save();
             return redirect (route('superadmin.dokter.index'))->with('pesan-berhasil','Anda berhasil mengubah data Dokter');

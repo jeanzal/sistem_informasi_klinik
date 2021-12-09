@@ -39,7 +39,9 @@
 
                     <select name="pasien_id" class="form-control">
                         @foreach($pasien as $row)
-                            <option value="{{$row->id}}">{{$row->name}}</option>
+                        @if($row->ket == "Membeli Obat")
+                            <option value="{{$row->id}}">{{$row->name}} -- {{$row->ket}}</option>
+                        @endif
                         @endforeach
                     </select>
                 </div>
@@ -58,6 +60,7 @@
 
                         </tbody>
                     </table>
+                    <a href="{{route('superadmin.transaction.index')}}" class="btn btn-sm btn-danger"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
                     <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save"></i> Simpan Transaksi</button>
             </form>
 

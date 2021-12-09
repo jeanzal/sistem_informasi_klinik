@@ -28,7 +28,7 @@
                 @endphp
 
                 <option value="admin" {{$admin}}>Admin</option>
-                <option value="admin" {{$sa}}>Super Admin</option>
+                <option value="sa" {{$sa}}>Super Admin</option>
             </select>
         </div>
 

@@ -57,13 +57,16 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::table('pasien')->insert ([
             'id' =>1,
-            'name'=>'Jhonson',
+            'name'=>'Jojo',
+            'keluhan'=>'Luka Ringan',
+            'ket' => 'Membeli Obat',
 
         ]);
         DB::table('pasien')->insert ([
             'id' =>2,
-            'name'=>'Layla',
-
+            'name'=>'Sinta',
+            'keluhan'=>'Periksa Mag',
+            'ket' => 'Rekam Medis',
         ]);
         DB::table('transactions')->insert ([
             'id' =>1,
@@ -83,6 +86,16 @@ class DatabaseSeeder extends Seeder
             'price'=>20000,
             'transaction_id'=>1,
             'product_id'=>2,
+        ]);
+        DB::table('dokters')->insert ([
+            'id' =>1,
+            'nama_dokter'=> 'Desri',
+            'spesialis'=> 'Ahli Bedah',
+        ]);
+        DB::table('dokters')->insert ([
+            'id' =>2,
+            'nama_dokter'=> 'Sihol',
+            'spesialis'=> 'Anak',
         ]);
     }
 }

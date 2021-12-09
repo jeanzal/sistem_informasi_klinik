@@ -10,6 +10,5 @@ class DashBoardController extends Controller
     {
         Session::put('title','Dashboard Si Klinik');
         return view('admin/content/dashboard');
-
     }
 }

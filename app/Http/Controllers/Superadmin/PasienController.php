@@ -16,13 +16,14 @@ class PasienController extends Controller
     }
     public function add(){
         Session::put('title','Tambah Data Pasien');
-
         return view ('superadmin/content/pasien/add');
     }
 
     public function store(Request $request){
         $pasien = new Pasien();
         $pasien->name = $request->name;
+        $pasien->keluhan = $request->keluhan;
+        $pasien->ket = $request->ket;
         try {
             $pasien->save();
             return redirect (route('superadmin.pasien.index'))->with('pesan-berhasil','Anda berhasil menambah data pasien');
@@ -38,6 +39,8 @@ class PasienController extends Controller
     public function update(Request $request){
         $pasien = Pasien::findOrFail($request->id);
         $pasien->name = $request->name;
+        $pasien->keluhan = $request->keluhan;
+        $pasien->ket = $request->ket;
         try {
             $pasien->save();
             return redirect (route('superadmin.pasien.index'))->with('pesan-berhasil','Anda berhasil mengubah data pasien');

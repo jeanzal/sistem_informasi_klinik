@@ -12,12 +12,13 @@ class DashBoardController extends Controller
 {
     public function index()
     {
+
         Session::put('title','Dashboard');
         $admin = Pengguna::all();
         $pasien = Pasien::all();
         $trans = Transaction::all();
-        // $dokter = Dokter::all();
-        return view('superadmin/content/dashboard', compact('admin', 'pasien', 'trans'));
+        $dokter = Dokter::all();
+        return view('superadmin/content/dashboard', compact('admin', 'pasien', 'trans','dokter'));
 
     }
     public function edit($id){

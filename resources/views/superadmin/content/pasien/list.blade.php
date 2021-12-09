@@ -6,6 +6,8 @@
         <tr>
             <th scope="col">No</th>
             <th scope="col">Nama Pasien</th>
+            <th scope="col">Keluhan Pasien</th>
+            <th scope="col">Keterangan</th>
             <th scope="col">Aksi</th>
         </tr>
         </thead>
@@ -17,6 +19,8 @@
             <tr>
                 <td>{{$no++}}</td>
                 <td>{{$row->name}}</td>
+                <td>{{$row->keluhan}}</td>
+                <td>{{$row->ket}}</td>
                 <td>
                     <a href="{{route('superadmin.pasien.edit', $row->id)}}" data-toggle="tooltip" data-placement="top" title="Edit Data"><i class="fa fa-edit"></i></a>
                     <a onclick = "return confirm('Apakah Anda Yakin?')" href="{{route('superadmin.pasien.delete', $row->id)}}" data-toggle="tooltip" data-placement="top" title="Hapus data"><i class="fa fa-trash"></i></a>

@@ -12,6 +12,7 @@ Route::get('/reset', [App\Http\Controllers\AuthController::class, 'reset'])->nam
 Route::post('/forgot', [App\Http\Controllers\AuthController::class, 'forgot'])->name('auth.forgot');
 Route::get('/password/{email}/{token}', [App\Http\Controllers\AuthController::class, 'password'])->name('auth.password');
 Route::post('/renew', [App\Http\Controllers\AuthController::class, 'renew'])->name('auth.renew');
+
 //Group Admin
 Route::group(['middleware'=>'auth:admin'],function (){
     Route::prefix('admin')->group(function (){
@@ -68,7 +69,11 @@ Route::group(['middleware'=>'auth:superadmin'],function (){
 
         //Grup Dokter
         Route::get('/dokter', [App\Http\Controllers\Superadmin\DokterController::class, 'index'])->name('superadmin.dokter.index');
-
+        Route::get('/dokter/add', [App\Http\Controllers\Superadmin\DokterController::class, 'add'])->name('superadmin.dokter.add');
+        Route::post('/dokter/store', [App\Http\Controllers\Superadmin\DokterController::class, 'store'])->name('superadmin.dokter.store');
+        Route::get('/dokter/edit/{id}', [App\Http\Controllers\Superadmin\DokterController::class, 'edit'])->name('superadmin.dokter.edit');
+        Route::post('/dokter/update', [App\Http\Controllers\Superadmin\DokterController::class, 'update'])->name('superadmin.dokter.update');
+        Route::get('/dokter/delete/{id}', [App\Http\Controllers\Superadmin\DokterController::class, 'delete'])->name('superadmin.dokter.delete');
 
         //Grup Pemmbayaran
         Route::get('/pembayaran', [App\Http\Controllers\Superadmin\PembayaranController::class, 'index'])->name('superadmin.pembayaran.index');

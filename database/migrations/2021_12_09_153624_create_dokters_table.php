@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePasienTable extends Migration
+class CreateDoktersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreatePasienTable extends Migration
      */
     public function up()
     {
-        Schema::create('pasien', function (Blueprint $table) {
+        Schema::create('dokters', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('keluhan');
-            $table->enum('ket', ['Membeli Obat', 'Rekam Medis']);
+            $table->string('nama_dokter');
+            $table->enum('spesialis', ['Ahli Bedah', 'Dokter Umum','Anak', 'Penyakit Dalam']);
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreatePasienTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pasien');
+        Schema::dropIfExists('dokters');
     }
 }

@@ -20,13 +20,15 @@ class RekamMedisController extends Controller
     }
     public function add(){
         Session::put('title','Tambah Data Rekam Medis');
-        return view ('superadmin/content/rekam_medis/add');
+        $dokter = Dokter::all();
+        return view ('superadmin/content/rekam_medis/add', compact('dokter'));
     }
 
     public function store(Request $request){
         $rekam_medis = new RekamMedis();
-        $rekam_medis->nama_dokter = $request->nama_dokter;
         $rekam_medis->spesialis = $request->spesialis;
+        $rekam_medis->biaya = $request->biaya;
+        $rekam_medis->dokter_id = $request->dokter_id;
         try {
             $rekam_medis->save();
             return redirect (route('superadmin.rekam_medis.index'))->with('pesan-berhasil','Anda berhasil menambah data Rekam Medis');
@@ -37,12 +39,14 @@ class RekamMedisController extends Controller
     public function edit($id){
         Session::put ('title','Ubah Data Rekam Medis');
         $rekam_medis = RekamMedis::findOrFail($id);
-        return view ('superadmin/content/rekam_medis/edit', compact('rekam_medis'));
+        $dokter = Dokter::all();
+        return view ('superadmin/content/rekam_medis/edit', compact('rekam_medis','dokter'));
     }
     public function update(Request $request){
         $rekam_medis = RekamMedis::findOrFail($request->id);
-        $rekam_medis->nama_dokter = $request->nama_dokter;
         $rekam_medis->spesialis = $request->spesialis;
+        $rekam_medis->biaya = $request->biaya;
+        $rekam_medis->dokter_id = $request->dokter_id;
         try {
             $rekam_medis->save();
             return redirect (route('superadmin.rekam_medis.index'))->with('pesan-berhasil','Anda berhasil mengubah data Rekam Medis');

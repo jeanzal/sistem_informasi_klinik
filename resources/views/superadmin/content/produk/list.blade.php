@@ -17,10 +17,13 @@
             $no = 1;
         @endphp
         @foreach($product as $row)
+        @php
+            $rupiah = number_format($row->price,0,',','.');
+        @endphp
             <tr>
                 <td>{{$no++}}</td>
                 <td>{{$row->name}}</td>
-                <td>{{$row->price}}</td>
+                <td>Rp {{$rupiah}}</td>
                 <td>{{$row->stock}}</td>
                 <td>{{$row->kategori}}</td>
                 <td>

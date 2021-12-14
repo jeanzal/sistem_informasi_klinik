@@ -17,10 +17,13 @@
             $no = 1;
         @endphp
         @foreach($rekam_medis as $data)
+        @php
+            $rupiah = number_format($data->biaya,0,',','.');
+        @endphp
             <tr>
                 <td>{{$no++}}</td>
                 <td>{{$data->spesialis}}</td>
-                <td>{{$data->biaya}}</td>
+                <td>Rp {{$rupiah}}</td>
                 <td>{{$data->nama_dokter}}</td>
                 </td>
                 <td>

@@ -10,7 +10,10 @@ use App\Models\Transaction;
 use App\Models\Item;
 use App\Models\ItemRM;
 use App\Models\Pasien;
+use App\Models\Pengguna;
 use App\Models\RekamMedis;
+use App\Models\Pembayaran;
+use App\Models\Dokter;
 use Illuminate\Support\Facades\DB;
 use Mpdf\Mpdf;
 
@@ -20,16 +23,17 @@ class TransactionController extends Controller
 
     public function index(){
         Session::put('title','Data Transaksi');
-        $transaction = Transaction::select('transactions.*','pasien.name')
-            ->join('pasien','pasien.id','=','transactions.pasien_id')->get();
+        $transaction = Transaction::select('transactions.*','pasien.name','admins.name as pengguna_name')
+            ->join('pasien','pasien.id','=','transactions.pasien_id')
+            ->join('admins','admins.id','=','transactions.pengguna_id')->get();
         return view('superadmin/content/transaction/list', compact('transaction'));
     }
 
-
     public function detail($id){
         Session::put('title','');
-        $transaction = Transaction::select('transactions.*','pasien.name')
+        $transaction = Transaction::select('transactions.*','pasien.name','admins.name as pengguna_name')
             ->join('pasien','pasien.id','=','transactions.pasien_id')
+            ->join('admins','admins.id','=','transactions.pengguna_id')
             ->where('transactions.id',$id)
             ->first();
         $item = Item::select('items.*','products.name as product_name','products.price as product_price')
@@ -42,8 +46,9 @@ class TransactionController extends Controller
     }
     public function detailRM($id){
         Session::put('title','');
-        $transaction = Transaction::select('transactions.*','pasien.name')
+        $transaction = Transaction::select('transactions.*','pasien.name','admins.name as pengguna_name')
             ->join('pasien','pasien.id','=','transactions.pasien_id')
+            ->join('admins','admins.id','=','transactions.pengguna_id')
             ->where('transactions.id',$id)
             ->first();
         $item = ItemRM::select('item_rm.*','rekam_medis.spesialis','rekam_medis.biaya')
@@ -58,14 +63,16 @@ class TransactionController extends Controller
         Session::put('title','Tambah Transaksi Membeli Obat');
         $product = Product::all();
         $pasien = Pasien::all();
-        return view ('superadmin/content/transaction/add', compact('product','pasien'));
+        $pengguna = Pengguna::all();
+        return view ('superadmin/content/transaction/add', compact('product','pasien','pengguna'));
 
     }
     public function addRM(){
         Session::put('title','Tambah Transaksi Rekam Medis');
         $rekam_medis = RekamMedis::all();
         $pasien = Pasien::all();
-        return view ('superadmin/content/transaction/addRM', compact('rekam_medis','pasien'));
+        $pengguna = Pengguna::all();
+        return view ('superadmin/content/transaction/addRM', compact('rekam_medis','pasien','pengguna'));
 
     }
     public function store(Request $request){
@@ -80,6 +87,7 @@ class TransactionController extends Controller
             $transaction->pasien_id = $pasien_id;
             $transaction->status = $request->status;
             $transaction->ket = $request->ket;
+            $transaction->pengguna_id = $request->pengguna_id;
             $transaction->save();
 
             foreach($send as $i){
@@ -113,6 +121,7 @@ class TransactionController extends Controller
             $transaction->pasien_id = $pasien_id;
             $transaction->status = $request->status;
             $transaction->ket = $request->ket;
+            $transaction->pengguna_id = $request->pengguna_id;
             $transaction->save();
 
             foreach($send as $i){
@@ -136,8 +145,9 @@ class TransactionController extends Controller
 
     public function print($id){
 
-        $transaction = Transaction::select('transactions.*','pasien.name')
+        $transaction = Transaction::select('transactions.*','pasien.name','admins.name as pengguna_name')
             ->join('pasien','pasien.id','=','transactions.pasien_id')
+            ->join('admins','admins.id','=','transactions.pengguna_id')
             ->where('transactions.id',$id)
             ->first();
 
@@ -155,14 +165,16 @@ class TransactionController extends Controller
     }
     public function printRM($id){
 
-        $transaction = Transaction::select('transactions.*','pasien.name')
+        $transaction = Transaction::select('transactions.*','pasien.name','admins.name as pengguna_name')
             ->join('pasien','pasien.id','=','transactions.pasien_id')
+            ->join('admins','admins.id','=','transactions.pengguna_id')
             ->where('transactions.id',$id)
             ->first();
 
-        $item = ItemRM::select('item_rm.*','rekam_medis.spesialis','rekam_medis.biaya')
+        $item = ItemRM::select('item_rm.*','rekam_medis.spesialis','rekam_medis.biaya','dokters.id as dokter_id','dokters.nama_dokter')
          ->join('transactions','transactions.id','=','item_rm.transaction_id')
          ->join('rekam_medis','rekam_medis.id','=','item_rm.rekam_medis_id')
+         ->join('dokters','dokters.id','=','item_rm.rekam_medis_id')
          ->where('transactions.id',$id)
          ->get();
 
@@ -170,6 +182,62 @@ class TransactionController extends Controller
         $mpdf = new Mpdf();
         $mpdf->WriteHTML($html);
         $mpdf->output();
+    }
+
+    public function bayar($id){
+        Session::put('title','Pembayaran Transaksi Membeli Obat');
+        $transaction = Transaction::select('transactions.*','pasien.name','admins.name as pengguna_name')
+            ->join('pasien','pasien.id','=','transactions.pasien_id')
+            ->join('admins','admins.id','=','transactions.pengguna_id')
+            ->where('transactions.id',$id)
+            ->first();
+        $item = Item::select('items.*','products.name as product_name','products.price as product_price')
+         ->join('transactions','transactions.id','=','items.transaction_id')
+         ->join('products','products.id','=','items.product_id')
+         ->where('transactions.id',$id)
+         ->get();
+
+         return view ('superadmin/content/transaction/bayar', compact('transaction','item'));
+    }
+
+    public function bayarRM($id){
+        Session::put('title','Pembayaran Transaksi Rekam Medis');
+        $transaction = Transaction::select('transactions.*','pasien.name','admins.name as pengguna_name')
+            ->join('pasien','pasien.id','=','transactions.pasien_id')
+            ->join('admins','admins.id','=','transactions.pengguna_id')
+            ->where('transactions.id',$id)
+            ->first();
+        $item = ItemRM::select('item_rm.*','rekam_medis.spesialis','rekam_medis.biaya')
+         ->join('transactions','transactions.id','=','item_rm.transaction_id')
+         ->join('rekam_medis','rekam_medis.id','=','item_rm.rekam_medis_id')
+         ->where('transactions.id',$id)
+         ->get();
+
+        return view ('superadmin/content/transaction/bayarRM', compact('transaction','item'));
+    }
+
+    public function aksi(Request $request){
+
+            $transaction = Transaction::findOrFail($request->id);
+            $transaction->date = date('Y-m-d H:i:s');
+            $transaction->pasien_id = $request->pasien_id;
+            $transaction->status = $request->status;
+            $transaction->ket = $request->ket;
+            $transaction->pengguna_id = $request->pengguna_id;
+            
+                $bayar = new Pembayaran();
+                $bayar->tgl_bayar = date('Y-m-d H:i:s');
+                $bayar->metode_bayar = $request->metode_bayar;
+                $bayar->transaction_id = $transaction->id;
+
+        try{    
+            $transaction->save();
+            $bayar->save();
+            return redirect (route('superadmin.transaction.index'))->with('pesan-berhasil','Anda berhasil Membayar Transaksi');
+        }catch(\Exception $e){
+            DB::rollBack();
+            return redirect (route('superadmin.transaction.index'))->with('pesan-gagal','Anda gagal Membayar Transaksi');
+        }
     }
 
 }

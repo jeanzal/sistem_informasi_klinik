@@ -11,7 +11,7 @@
     <label>Transaksi Id: {{$transaction->id}}</label><br/>
     <label>Tanggal Transaksi: {{$transaction->date}}</label><br/>
     <label>Nama Pasien: {{$transaction->name}}</label><br>
-    <label>Keterangan Transaksi : {{$transaction->ket}}</label>
+    <label>Keterangan Transaksi : {{$transaction->ket}}</label><br>
 
 
     <p></p>

@@ -61,16 +61,24 @@ Route::group(['middleware'=>'auth:superadmin'],function (){
         Route::post('/pasien/update', [App\Http\Controllers\Superadmin\PasienController::class, 'update'])->name('superadmin.pasien.update');
         Route::get('/pasien/delete/{id}', [App\Http\Controllers\Superadmin\PasienController::class, 'delete'])->name('superadmin.pasien.delete');
 
-        //Group transcation
+        //Group Transcation 
         Route::get('/transaction', [App\Http\Controllers\Superadmin\TransactionController::class, 'index'])->name('superadmin.transaction.index');
-        Route::get('/transaction/add', [App\Http\Controllers\Superadmin\TransactionController::class, 'add'])->name('superadmin.transaction.add');
-        Route::get('/transaction/addRM', [App\Http\Controllers\Superadmin\TransactionController::class, 'addRM'])->name('superadmin.transaction.addRM');
-        Route::get('/transaction/detail/{id}', [App\Http\Controllers\Superadmin\TransactionController::class, 'detail'])->name('superadmin.transaction.detail');
-        Route::get('/transaction/detailRM/{id}', [App\Http\Controllers\Superadmin\TransactionController::class, 'detailRM'])->name('superadmin.transaction.detailRM');
         Route::post('/transaction/store', [App\Http\Controllers\Superadmin\TransactionController::class, 'store'])->name('superadmin.transaction.store');
-        Route::post('/transaction/trans_rm', [App\Http\Controllers\Superadmin\TransactionController::class, 'trans_rm'])->name('superadmin.transaction.trans_rm');
+        Route::post('/transaction/aksi', [App\Http\Controllers\Superadmin\TransactionController::class, 'aksi'])->name('superadmin.transaction.aksi');
+
+        // Grup Transaksi Membeli Obat
+        Route::get('/transaction/add', [App\Http\Controllers\Superadmin\TransactionController::class, 'add'])->name('superadmin.transaction.add');
+        Route::get('/transaction/detail/{id}', [App\Http\Controllers\Superadmin\TransactionController::class, 'detail'])->name('superadmin.transaction.detail');
+        Route::get('/transaction/bayar/{id}', [App\Http\Controllers\Superadmin\TransactionController::class, 'bayar'])->name('superadmin.transaction.bayar');
         Route::get('/transaction/print/{id}', [App\Http\Controllers\Superadmin\TransactionController::class, 'print'])->name('superadmin.transaction.print');
+
+        // Grup Transaksi Rekam Medis
+        Route::get('/transaction/addRM', [App\Http\Controllers\Superadmin\TransactionController::class, 'addRM'])->name('superadmin.transaction.addRM');
+        Route::get('/transaction/detailRM/{id}', [App\Http\Controllers\Superadmin\TransactionController::class, 'detailRM'])->name('superadmin.transaction.detailRM');
+        Route::get('/transaction/bayarRM/{id}', [App\Http\Controllers\Superadmin\TransactionController::class, 'bayarRM'])->name('superadmin.transaction.bayarRM');
+        Route::post('/transaction/trans_rm', [App\Http\Controllers\Superadmin\TransactionController::class, 'trans_rm'])->name('superadmin.transaction.trans_rm');
         Route::get('/transaction/printRM/{id}', [App\Http\Controllers\Superadmin\TransactionController::class, 'printRM'])->name('superadmin.transaction.printRM');
+
 
         //Grup Dokter
         Route::get('/dokter', [App\Http\Controllers\Superadmin\DokterController::class, 'index'])->name('superadmin.dokter.index');

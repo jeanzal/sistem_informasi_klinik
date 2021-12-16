@@ -11,7 +11,8 @@
     <label>Id Transaksi : {{$transaction->id}}</label><br/>
     <label>Tanggal Transaksi : {{date('d M y h:m:s', strtotime($transaction->date))}}</label><br/>
     <label>Nama Pasien : <b>{{$transaction->name}}</b></label><br>
-    <label>Keterangan Transaksi : <b>{{$transaction->ket}}</b></label>
+    <label>Keterangan Transaksi : <b>{{$transaction->ket}}</b></label><br>
+    
 
     <p></p>
     <table class="table table-hover">

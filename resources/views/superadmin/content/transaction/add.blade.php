@@ -62,6 +62,7 @@
                     </table>
                     <input type="hidden" name="status" value="Blom Bayar">
                     <input type="hidden" name="ket" value="Membeli Obat">
+                    <input type="hidden" name="pengguna_id" value="{{Auth::guard('superadmin')->user()->id}}">
                     <a href="{{route('superadmin.transaction.index')}}" class="btn btn-sm btn-danger"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
                     <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save"></i> Simpan Transaksi</button>
             </form>

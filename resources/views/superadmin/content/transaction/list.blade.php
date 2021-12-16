@@ -18,6 +18,7 @@
                 <th scope="col">Nama Pasien</th>
                 <th scope="col">Status</th>
                 <th scope="col">Keterangan</th>
+                <th scope="col">Petugas Penanggung Jawab</th>
                 <th scope="col">Aksi</th>
             </tr>
             </thead>
@@ -44,6 +45,7 @@
                             <div class="badge badge-warning">{{$row->ket}}</div>
                         @endif
                     </td>
+                    <td>{{$row->pengguna_name}}</td>
                     <td>
                         @if($row->ket == "Membeli Obat")
                             <a href="{{route('superadmin.transaction.detail',$row->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail Transaksi Membeli Obat"><i class="fa fa-eye"></i></a>
@@ -51,16 +53,20 @@
                         <a href="{{route('superadmin.transaction.detailRM',$row->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Detail Transaksi Rekam Medis"><i class="fa fa-eye"></i></a>
                         @endif
 
-                        @if($row->status == "Blom Bayar")
+                        @if($row->status == "Sudah Bayar")
                             @if($row->ket == "Membeli Obat")
                                 <a href="{{route('superadmin.transaction.print',$row->id)}}" class="btn btn-sm btn-dark" data-toggle="tooltip" data-placement="top" title="Print Detail Pembelian Obat" target="_blank"><i class="fa fa-print"></i></a>
                             @elseif($row->ket == "Rekam Medis")
                                 <a href="{{route('superadmin.transaction.printRM',$row->id)}}" class="btn btn-sm btn-dark" data-toggle="tooltip" data-placement="top" title="Print Detail Rekam Medis" target="_blank"><i class="fa fa-print"></i></a>
                             @endif
                         @elseif($row->status == "Blom Bayar")
-                            <a href="#" class="btn btn-sm btn-danger" ><i class="fa fa-money-check-alt">Bayar</i></a>
+                            @if($row->ket == "Membeli Obat")
+                                <a href="{{route('superadmin.transaction.bayar',$row->id)}}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Proses Bayar Membeli Obat" ><i class="fa fa-money-bill"> Bayar</i></a>
+                            @elseif($row->ket == "Rekam Medis")
+                                <a href="{{route('superadmin.transaction.bayarRM',$row->id)}}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Proses Bayar Rekam Medis" ><i class="fa fa-money-bill"> Bayar</i></a>
+                            @endif
                         @endif
-                        <a href="#" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title="Proses Bayar" ><i class="fa fa-money-bill"> Bayar</i></a>
+                        
                     </td>
                 </tr>
             @endforeach

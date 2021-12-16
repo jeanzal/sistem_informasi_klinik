@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         DB::table('admins')->insert([
+            'id' => 1,
             'name' => 'SuperAdmin',
             'role' => 'sa',
             'email' => 'sa@mail.com',
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
 
         ]);
         DB::table('admins')->insert([
+            'id' => 2,
             'name' => 'Admin',
             'role' => 'admin',
             'email' => 'admin@mail.com',
@@ -34,6 +36,7 @@ class DatabaseSeeder extends Seeder
 
         ]);
         DB::table('admins')->insert([
+            'id' => 3,
             'name' => 'Jojo',
             'role' => 'user',
             'email' => 'jojo@mail.com',
@@ -81,6 +84,7 @@ class DatabaseSeeder extends Seeder
             'pasien_id'=>1,
             'status'=>'Blom Bayar',
             'ket'=>'Membeli Obat',
+            'pengguna_id'=>1,
         ]);
         DB::table('items')->insert ([
             'id' =>1,

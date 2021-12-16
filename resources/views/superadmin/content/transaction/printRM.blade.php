@@ -19,10 +19,10 @@
         <thead>
         <tr>
             <th>No</th>
-            <th>Produk</th>
-            <th >Harga satuan</th>
-            <th >Banyaknya</th>
-            <th >Subtotal</th>
+            <th>Diagnosa</th>
+            <th>Biaya</th>
+            <th>Banyak Penanganan</th>
+            <th>Subtotal</th>
         </tr>
         </thead>
         <tbody>
@@ -32,15 +32,15 @@
 
         @foreach($item as $row)
             @php
-                $total +=$row->product_price * $row->qty;
-                $subtotal = $row->product_price * $row->qty;
+                $total +=$row->biaya * $row->qty;
+                $subtotal = $row->biaya * $row->qty;
             @endphp
 
             <tr>
                 <td>{{$no++}}</td>
-                <td>{{$row->product_name}}</td>
-                <td>{{Helper::rupiah($row->product_price)}}</td>
-                <td>{{$row->qty}}</td>
+                <td>{{$row->spesialis}}</td>
+                <td>{{Helper::rupiah($row->biaya)}}</td>
+                <th class="text-center">{{$row->qty}}</th>
                 <td>{{Helper::rupiah($subtotal)}}</td>
 
             </tr>

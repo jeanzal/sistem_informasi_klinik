@@ -78,7 +78,9 @@ class DatabaseSeeder extends Seeder
         DB::table('transactions')->insert ([
             'id' =>1,
             'date'=>'2021-11-19 13:22:38',
-            'pasien_id'=>1
+            'pasien_id'=>1,
+            'status'=>'Blom Bayar',
+            'ket'=>'Membeli Obat',
         ]);
         DB::table('items')->insert ([
             'id' =>1,

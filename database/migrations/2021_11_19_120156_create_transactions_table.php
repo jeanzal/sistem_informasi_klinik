@@ -17,6 +17,8 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->dateTime('date');
             $table->unsignedBigInteger('pasien_id');
+            $table->enum('status', ['Sudah Bayar', 'Blom Bayar']);
+            $table->enum('ket', ['Membeli Obat', 'Rekam Medis']);
             $table->timestamps();
             $table->foreign('pasien_id')->references('id')->on('pasien')->onUpdate('cascade')->onDelete('cascade');
 

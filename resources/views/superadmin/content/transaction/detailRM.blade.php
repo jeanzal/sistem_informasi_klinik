@@ -17,22 +17,22 @@
     <table class="table table-hover">
         <thead class="table-dark">
         <tr>
-            <th scope="col">Produk</th>
-            <th scope="col">Harga satuan</th>
-            <th scope="col">Banyaknya</th>
+            <th scope="col">Diagnosa</th>
+            <th scope="col">Biaya</th>
+            <th scope="col">Banyaknya Penanganan</th>
             <th scope="col">Subtotal</th>
         </tr>
         </thead>
         <tbody>
         @foreach($item as $row)
             @php
-                $total +=$row->product_price * $row->qty;
-                $subtotal = $row->product_price * $row->qty;
+                $total +=$row->biaya * $row->qty;
+                $subtotal = $row->biaya * $row->qty;
             @endphp
 
             <tr>
-                <td>{{$row->product_name}}</td>
-                <td>{{Helper::rupiah($row->product_price)}}</td>
+                <td>{{$row->spesialis}}</td>
+                <td>{{Helper::rupiah($row->biaya)}}</td>
                 <td>{{$row->qty}}</td>
                 <td>{{Helper::rupiah($subtotal)}}</td>
 

@@ -9,6 +9,6 @@ class Transaction extends Model
     protected $table = 'transactions';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'date','pasien_id',
+        'date','pasien_id','status','ket'
     ];
 }

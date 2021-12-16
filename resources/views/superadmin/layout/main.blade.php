@@ -78,7 +78,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{route('superadmin.laporan.index')}}">
                 <i class="fas fa-fw fa-book"></i>
                 <span>Laporan</span></a>
         </li>

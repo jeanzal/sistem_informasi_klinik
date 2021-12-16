@@ -99,6 +99,15 @@ Route::group(['middleware'=>'auth:superadmin'],function (){
         //Grup Pemmbayaran
         Route::get('/pembayaran', [App\Http\Controllers\Superadmin\PembayaranController::class, 'index'])->name('superadmin.pembayaran.index');
 
+        // Grup Laporan
+        Route::get('/laporan', [App\Http\Controllers\Superadmin\LaporanController::class, 'index'])->name('superadmin.laporan.index');
+        Route::get('/laporan/pdfSemua', [App\Http\Controllers\Superadmin\LaporanController::class, 'pdfSemua'])->name('superadmin.laporan.pdfSemua');
+        Route::get('/laporan/exSemua', [App\Http\Controllers\Superadmin\LaporanController::class, 'exSemua'])->name('superadmin.laporan.exSemua');
+        Route::get('/laporan/pdfPO', [App\Http\Controllers\Superadmin\LaporanController::class, 'pdfPO'])->name('superadmin.laporan.pdfPO');
+        Route::get('/laporan/exPO', [App\Http\Controllers\Superadmin\LaporanController::class, 'exPO'])->name('superadmin.laporan.exPO');
+        Route::get('/laporan/pdfRM', [App\Http\Controllers\Superadmin\LaporanController::class, 'pdfRM'])->name('superadmin.laporan.pdfRM');
+        Route::get('/laporan/exRM', [App\Http\Controllers\Superadmin\LaporanController::class, 'exRM'])->name('superadmin.laporan.exRM');
+
     });
 });
 

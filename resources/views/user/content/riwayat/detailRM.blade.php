@@ -1,4 +1,4 @@
-@extends('superadmin/layout/main')
+@extends('user/layout/main')
 @section('content')
 
     @php
@@ -48,5 +48,5 @@
             </tr>
         </tbody>
     </table>
-    <a href="{{route('superadmin.transaction.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
+    <a href="{{route('user.riwayatTransaksi.index')}}" class="btn btn-sm btn-primary"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
 @endsection

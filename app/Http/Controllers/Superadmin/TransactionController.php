@@ -51,9 +51,10 @@ class TransactionController extends Controller
             ->join('admins','admins.id','=','transactions.pengguna_id')
             ->where('transactions.id',$id)
             ->first();
-        $item = ItemRM::select('item_rm.*','rekam_medis.spesialis','rekam_medis.biaya')
+        $item = ItemRM::select('item_rm.*','rekam_medis.spesialis','rekam_medis.biaya','dokters.nama_dokter')
          ->join('transactions','transactions.id','=','item_rm.transaction_id')
          ->join('rekam_medis','rekam_medis.id','=','item_rm.rekam_medis_id')
+         ->join('dokters','dokters.id','=','rekam_medis.dokter_id')
          ->where('transactions.id',$id)
          ->get();
 
@@ -171,12 +172,12 @@ class TransactionController extends Controller
             ->where('transactions.id',$id)
             ->first();
 
-        $item = ItemRM::select('item_rm.*','rekam_medis.spesialis','rekam_medis.biaya','dokters.id as dokter_id','dokters.nama_dokter')
-         ->join('transactions','transactions.id','=','item_rm.transaction_id')
-         ->join('rekam_medis','rekam_medis.id','=','item_rm.rekam_medis_id')
-         ->join('dokters','dokters.id','=','item_rm.rekam_medis_id')
-         ->where('transactions.id',$id)
-         ->get();
+        $item = ItemRM::select('item_rm.*','rekam_medis.spesialis','rekam_medis.biaya','dokters.nama_dokter')
+            ->join('transactions','transactions.id','=','item_rm.transaction_id')
+            ->join('rekam_medis','rekam_medis.id','=','item_rm.rekam_medis_id')
+            ->join('dokters','dokters.id','=','rekam_medis.dokter_id')
+            ->where('transactions.id',$id)
+            ->get();
 
         $html= view ('superadmin/content/transaction/printRM', compact('transaction','item'));
         $mpdf = new Mpdf();

@@ -9,6 +9,7 @@
             <th scope="col">Tanggal Pembayaran</th>
             <th scope="col">Metode Pembayaran</th>
             <th scope="col">Status</th>
+            <th scope="col">Nama Pasien</th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,7 @@
                 <td>{{$no++}}</td>
                 <td>{{$d->tgl_bayar}}</td>
                 <td>{{$d->metode_bayar}}</td>
+                <td>{{$d->nama_pasien}}</td>
                 <td>
                     @if($d->status == "Sudah Bayar")
                         <div class="badge badge-success">Lunas</div>

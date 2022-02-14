@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Jojo',
             'role' => 'user',
             'email' => 'jojo@mail.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make('12345678'),
             'image' => 'user.png',
         ]);
         DB::table('categories')->insert ([

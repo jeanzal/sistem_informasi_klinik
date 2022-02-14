@@ -40,7 +40,7 @@
                     <select name="pasien_id" class="form-control">
                         @foreach($pasien as $row)
                         @if($row->ket == "Rekam Medis")
-                            <option value="{{$row->id}}">{{$row->name}} -- {{$row->ket}}</option>
+                            <option value="{{$row->id}}">{{$row->name}} -- {{$row->ket}} -- {{$row->keluhan}}</option>
                         @endif
                         @endforeach
                     </select>

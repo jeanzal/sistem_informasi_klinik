@@ -17,6 +17,8 @@ Route::post('/renew', [App\Http\Controllers\AuthController::class, 'renew'])->na
 Route::group(['middleware'=>'auth:admin'],function (){
     Route::prefix('admin')->group(function (){
         Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard.index');
+
+        
     });
 });
 
@@ -115,6 +117,17 @@ Route::group(['middleware'=>'auth:superadmin'],function (){
 Route::group(['middleware'=>'auth:user'],function (){
     Route::prefix('user')->group(function (){
         Route::get('/dashboard', [App\Http\Controllers\User\DashboardController::class, 'index'])->name('user.dashboard.index');
+
+        // Group Riwayat Transaksi
+        Route::get('/riwayatTransaksi', [App\Http\Controllers\User\RiwayatTransaksiController::class, 'index'])->name('user.riwayatTransaksi.index');
+       
+        Route::get('/riwayatTransaksi/detail/{id}', [App\Http\Controllers\User\RiwayatTransaksiController::class, 'detail'])->name('user.riwayatTransaksi.detail');
+        Route::get('/riwayatTransaksi/bayar/{id}', [App\Http\Controllers\User\RiwayatTransaksiController::class, 'bayar'])->name('user.riwayatTransaksi.bayar');
+        Route::get('/riwayatTransaksi/print/{id}', [App\Http\Controllers\User\RiwayatTransaksiController::class, 'print'])->name('user.riwayatTransaksi.print');
+        Route::get('/riwayatTransaksi/detailRM/{id}', [App\Http\Controllers\User\RiwayatTransaksiController::class, 'detailRM'])->name('user.riwayatTransaksi.detailRM');
+        Route::get('/riwayatTransaksi/bayarRM/{id}', [App\Http\Controllers\User\RiwayatTransaksiController::class, 'bayarRM'])->name('user.riwayatTransaksi.bayarRM');
+        Route::get('/riwayatTransaksi/printRM/{id}', [App\Http\Controllers\User\RiwayatTransaksiController::class, 'printRM'])->name('user.riwayatTransaksi.printRM');
+
     });
 });
 
